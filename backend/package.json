@@ -6,7 +6,6 @@
   "scripts": {
     "dev:server": "nodemon"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
