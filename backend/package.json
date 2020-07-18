@@ -6,7 +6,6 @@
   "scripts": {
     "dev:server": "nodemon"
   },
-  "type": "module",
   "keywords": [],
   "author": "",
   "license": "ISC",
@@ -21,6 +20,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "uuidv4": "^6.2.0"
   }
 }
