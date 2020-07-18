@@ -1,7 +1,16 @@
 import React from 'react';
 
+import Routes from './routes';
+
+import GlobalStyles from './styles/global';
+
 const App = () => {
-    return <h1>Hello World</h1>;
+  return (
+    <>
+      <GlobalStyles />
+      <Routes />
+    </>
+  );
 };
 
 export default App;
