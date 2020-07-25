@@ -57,6 +57,7 @@ postsRouter.delete('/:id', (request, response) => {
   return response.send({ msg: 'Post deleted' });
 });
 
+// Handle likes on a post
 postsRouter.post('/:id/like', (request, response) => {
   const { id } = request.params;
 
@@ -87,6 +88,7 @@ postsRouter.delete('/:id/like', (request, response) => {
   return response.json(posts[findPost]);
 });
 
+// Handle comments on a post
 postsRouter.post('/:id/comment', (request, response) => {
   const { id } = request.params;
   const { content } = request.body;
@@ -124,6 +126,20 @@ postsRouter.delete('/:id/comment/:comment_id', (request, response) => {
   posts[findPost].comments.splice(findComment, 1);
 
   return response.send({ msg: 'Comment removed' });
+});
+
+postsRouter.get('/:id/comment', (request, response) => {
+  const { id } = request.params;
+
+  const findPost = posts.findIndex(post => post.id === id);
+
+  if (findPost < 0) {
+    return response.status(400).json({ error: 'Could not find post' });
+  }
+
+  const comments = posts[findPost].comments;
+
+  return response.json(comments);
 });
 
 module.exports = postsRouter;
