@@ -1,5 +1,7 @@
 const { uuid } = require('uuidv4');
 
+const postsRepository = require('../repositories/PostsRepository');
+
 class CreatePostService {
   execute({ user_id, content }) {
     const date = getCreationDate();
@@ -12,6 +14,8 @@ class CreatePostService {
       likes: 0,
       user_id,
     };
+
+    postsRepository.push(post);
 
     return post;
   }
