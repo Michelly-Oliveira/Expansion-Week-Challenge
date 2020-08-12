@@ -1,9 +1,14 @@
-const postsRepository = require('../repositories/PostsRepository');
-
-// Later this service will list all posts from a specific user
 class ListPostsService {
-  execute() {
-    return postsRepository;
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
+  execute({ user_id }) {
+    const userPosts = this.postsRepository.filter(
+      post => post.user_id === user_id,
+    );
+
+    return userPosts;
   }
 }
 

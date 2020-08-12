@@ -1,10 +1,8 @@
 const Router = require('express');
 const postsRouter = Router();
 
-const CreatePostService = require('../../../services/CreatePostService');
-const UpdatePostService = require('../../../services/UpdatePostService');
-const DeletePostService = require('../../../services/DeletePostService');
-const ListPostsService = require('../../../services/ListPostsService');
+const PostsController = require('../controllers/PostsController');
+const UserPostsController = require('../controllers/UserPostsController');
 
 const AddLikeToPostService = require('../../../services/AddLikeToPostService');
 const DeleteLikeFromPostService = require('../../../services/DeleteLikeFromPostService');
@@ -13,54 +11,17 @@ const AddCommentToPostService = require('../../../services/AddCommentToPostServi
 const DeleteCommentFromPostService = require('../../../services/DeleteCommentFromPostService');
 const ListCommentsFromPostService = require('../../../services/ListCommentsFromPostService');
 
-// http://localhost:3333/posts
-postsRouter.get('/', (request, response) => {
-  const listPosts = new ListPostsService();
+const postsControllers = new PostsController();
+const userPostsControllers = new UserPostsController();
 
-  const post = listPosts.execute();
-
-  return response.json(post);
-});
+postsRouter.get('/', userPostsControllers.index);
 
 // User must be authenticated to be able to interact with posts: create a middleware to ensure the user is authenticated
-postsRouter.post('/', (request, response) => {
-  const { content } = request.body;
+postsRouter.post('/', postsControllers.create);
 
-  const createPost = new CreatePostService();
+postsRouter.put('/:id', userPostsControllers.update);
 
-  const post = createPost.execute({
-    user_id: 'whoWroteThePost_Id',
-    content,
-  });
-
-  return response.json(post);
-});
-
-postsRouter.put('/:id', (request, response) => {
-  const { id } = request.params;
-  const { content } = request.body;
-
-  const updatePost = new UpdatePostService();
-
-  const post = updatePost.execute({
-    post_id: id,
-    content,
-  });
-
-  return response.json(post);
-});
-
-postsRouter.delete('/:id', (request, response) => {
-  const { id } = request.params;
-
-  const deletePost = new DeletePostService();
-
-  deletePost.execute({
-    post_id: id,
-  });
-
-  return response.send({ msg: 'Post deleted' });
-});
+postsRouter.delete('/:id', userPostsControllers.delete);
 
 // Handle likes on a post
 postsRouter.post('/:id/like', (request, response) => {

@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
+class DeletePostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
 
-class UpdatePostService {
   execute({ post_id }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -10,8 +12,8 @@ class UpdatePostService {
       throw new Error({ status: 404, error: 'Could not find post' });
     }
 
-    postsRepository.splice(findPostIndex, 1);
+    this.postsRepository.splice(findPostIndex, 1);
   }
 }
 
-module.exports = UpdatePostService;
+module.exports = DeletePostService;

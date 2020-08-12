@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
-
 class UpdatePostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id, content }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -10,9 +12,9 @@ class UpdatePostService {
       throw new Error({ status: 404, error: 'Could not find post' });
     }
 
-    postsRepository[findPostIndex].content = content;
+    this.postsRepository[findPostIndex].content = content;
 
-    const updatedPost = postsRepository[findPostIndex];
+    const updatedPost = this.postsRepository[findPostIndex];
 
     return updatedPost;
   }
