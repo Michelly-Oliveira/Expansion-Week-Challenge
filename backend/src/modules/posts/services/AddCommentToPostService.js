@@ -1,10 +1,12 @@
 const { uuid } = require('uuidv4');
 
-const postsRepository = require('../repositories/PostsRepository');
-
 class AddCommentToPostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id, content }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -21,7 +23,7 @@ class AddCommentToPostService {
       author: 'Who wrote the comment',
     };
 
-    const postToAddComment = postsRepository[findPostIndex];
+    const postToAddComment = this.postsRepository[findPostIndex];
     postToAddComment.comments.push(comment);
 
     return postToAddComment;

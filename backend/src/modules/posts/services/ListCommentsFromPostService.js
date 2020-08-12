@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
-
 class ListCommentsFromPostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -13,7 +15,7 @@ class ListCommentsFromPostService {
       });
     }
 
-    const comments = postsRepository[findPostIndex].comments;
+    const comments = this.postsRepository[findPostIndex].comments;
 
     return comments;
   }

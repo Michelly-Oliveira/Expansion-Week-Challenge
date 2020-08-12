@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
-
 class DeleteCommentFromPostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id, comment_id }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -13,7 +15,7 @@ class DeleteCommentFromPostService {
       });
     }
 
-    const findComment = postsRepository[findPostIndex].comments.findIndex(
+    const findComment = this.postsRepository[findPostIndex].comments.findIndex(
       comment => comment.id === comment_id,
     );
 
@@ -24,7 +26,7 @@ class DeleteCommentFromPostService {
       });
     }
 
-    const post = postsRepository[findPostIndex];
+    const post = this.postsRepository[findPostIndex];
 
     post.comments.splice(findComment, 1);
   }

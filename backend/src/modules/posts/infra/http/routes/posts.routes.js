@@ -6,13 +6,12 @@ const UserPostsController = require('../controllers/UserPostsController');
 
 const LikesController = require('../controllers/LikesController');
 
-const AddCommentToPostService = require('../../../services/AddCommentToPostService');
-const DeleteCommentFromPostService = require('../../../services/DeleteCommentFromPostService');
-const ListCommentsFromPostService = require('../../../services/ListCommentsFromPostService');
+const CommentsController = require('../controllers/CommentsController');
 
 const postsControllers = new PostsController();
 const userPostsControllers = new UserPostsController();
 const likesControllers = new LikesController();
+const commentsControllers = new CommentsController();
 
 postsRouter.get('/', userPostsControllers.index);
 
@@ -23,49 +22,14 @@ postsRouter.put('/:id', userPostsControllers.update);
 
 postsRouter.delete('/:id', userPostsControllers.delete);
 
-// Handle likes on a post
-postsRouter.post('/:id/like', likesControllers.create);
+postsRouter.post('/:id/likes', likesControllers.create);
 
-postsRouter.delete('/:id/like', likesControllers.delete);
+postsRouter.delete('/:id/likes', likesControllers.delete);
 
-// // Handle comments on a post
-postsRouter.post('/:id/comment', (request, response) => {
-  const { id } = request.params;
-  const { content } = request.body;
+postsRouter.post('/:id/comments', commentsControllers.create);
 
-  const addCommentToPost = new AddCommentToPostService();
+postsRouter.delete('/:id/comments/:comment_id', commentsControllers.delete);
 
-  const postWithComment = addCommentToPost.execute({
-    post_id: id,
-    content,
-  });
-
-  return response.json(postWithComment);
-});
-
-postsRouter.delete('/:id/comment/:comment_id', (request, response) => {
-  const { id, comment_id } = request.params;
-
-  const deleteCommentFromPost = new DeleteCommentFromPostService();
-
-  deleteCommentFromPost.execute({
-    post_id: id,
-    comment_id,
-  });
-
-  return response.send({ msg: 'Comment removed' });
-});
-
-postsRouter.get('/:id/comment', (request, response) => {
-  const { id } = request.params;
-
-  const listCommentsFromPost = new ListCommentsFromPostService();
-
-  const comments = listCommentsFromPost.execute({
-    post_id: id,
-  });
-
-  return response.json(comments);
-});
+postsRouter.get('/:id/comments', commentsControllers.index);
 
 module.exports = postsRouter;
