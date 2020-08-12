@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
-
 class DeleteLikeFromPostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -13,7 +15,7 @@ class DeleteLikeFromPostService {
       });
     }
 
-    const post = postsRepository[findPostIndex];
+    const post = this.postsRepository[findPostIndex];
 
     // The post has at least one like
     if (post.likes > 0) {

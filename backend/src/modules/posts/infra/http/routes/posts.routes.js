@@ -4,8 +4,7 @@ const postsRouter = Router();
 const PostsController = require('../controllers/PostsController');
 const UserPostsController = require('../controllers/UserPostsController');
 
-const AddLikeToPostService = require('../../../services/AddLikeToPostService');
-const DeleteLikeFromPostService = require('../../../services/DeleteLikeFromPostService');
+const LikesController = require('../controllers/LikesController');
 
 const AddCommentToPostService = require('../../../services/AddCommentToPostService');
 const DeleteCommentFromPostService = require('../../../services/DeleteCommentFromPostService');
@@ -13,6 +12,7 @@ const ListCommentsFromPostService = require('../../../services/ListCommentsFromP
 
 const postsControllers = new PostsController();
 const userPostsControllers = new UserPostsController();
+const likesControllers = new LikesController();
 
 postsRouter.get('/', userPostsControllers.index);
 
@@ -24,29 +24,9 @@ postsRouter.put('/:id', userPostsControllers.update);
 postsRouter.delete('/:id', userPostsControllers.delete);
 
 // Handle likes on a post
-postsRouter.post('/:id/like', (request, response) => {
-  const { id } = request.params;
+postsRouter.post('/:id/like', likesControllers.create);
 
-  const addLikeToPost = new AddLikeToPostService();
-
-  const postWithOneMoreLike = addLikeToPost.execute({
-    post_id: id,
-  });
-
-  return response.json(postWithOneMoreLike);
-});
-
-postsRouter.delete('/:id/like', (request, response) => {
-  const { id } = request.params;
-
-  const deleteLikeFromPost = new DeleteLikeFromPostService();
-
-  const post = deleteLikeFromPost.execute({
-    post_id: id,
-  });
-
-  return response.json(post);
-});
+postsRouter.delete('/:id/like', likesControllers.delete);
 
 // // Handle comments on a post
 postsRouter.post('/:id/comment', (request, response) => {

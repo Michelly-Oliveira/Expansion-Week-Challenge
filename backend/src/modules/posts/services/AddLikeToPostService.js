@@ -1,8 +1,10 @@
-const postsRepository = require('../repositories/PostsRepository');
-
 class AddLikeToPostService {
+  constructor(postsRepository) {
+    this.postsRepository = postsRepository;
+  }
+
   execute({ post_id }) {
-    const findPostIndex = postsRepository.findIndex(
+    const findPostIndex = this.postsRepository.findIndex(
       post => post.id === post_id,
     );
 
@@ -13,7 +15,7 @@ class AddLikeToPostService {
       });
     }
 
-    const postToAddLike = postsRepository[findPostIndex];
+    const postToAddLike = this.postsRepository[findPostIndex];
 
     postToAddLike.likes++;
 
