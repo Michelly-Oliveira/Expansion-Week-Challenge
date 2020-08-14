@@ -1,5 +1,6 @@
 const { uuid } = require('uuidv4');
 const { format } = require('date-fns');
+const ptBR = require('date-fns/locale/pt-BR');
 
 class CreatePostService {
   constructor(postsRepository) {
@@ -27,7 +28,7 @@ class CreatePostService {
 function getCreationDate() {
   // 12 of August
   // Maybe after we have a database use date in timestamp format
-  const date = format(Date.now(), "dd 'of' MMMM");
+  const date = format(Date.now(), "dd 'de' MMMM", { locale: ptBR });
 
   return date;
 }
