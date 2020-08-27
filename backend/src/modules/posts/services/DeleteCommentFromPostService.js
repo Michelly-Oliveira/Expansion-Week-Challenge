@@ -1,3 +1,5 @@
+const AppError = require('../../../shared/errors/AppError');
+
 class DeleteCommentFromPostService {
   constructor(postsRepository) {
     this.postsRepository = postsRepository;
@@ -9,7 +11,7 @@ class DeleteCommentFromPostService {
     );
 
     if (findPostIndex < 0) {
-      throw new Error({
+      throw new AppError({
         status: 404,
         error: 'Cannot delete comment from non-existing post',
       });
@@ -20,7 +22,7 @@ class DeleteCommentFromPostService {
     );
 
     if (findComment < 0) {
-      throw new Error({
+      throw new AppError({
         status: 404,
         error: 'Cannot delete non-existing comment',
       });

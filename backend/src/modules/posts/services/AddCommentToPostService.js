@@ -1,5 +1,7 @@
 const { uuid } = require('uuidv4');
 
+const AppError = require('../../../shared/errors/AppError');
+
 class AddCommentToPostService {
   constructor(postsRepository) {
     this.postsRepository = postsRepository;
@@ -11,7 +13,7 @@ class AddCommentToPostService {
     );
 
     if (findPostIndex < 0) {
-      throw new Error({
+      throw new AppError({
         status: 404,
         error: 'Cannot add comment to non-existing post',
       });

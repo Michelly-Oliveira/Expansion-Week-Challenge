@@ -1,3 +1,5 @@
+const AppError = require('../../../shared/errors/AppError');
+
 class UpdatePostService {
   constructor(postsRepository) {
     this.postsRepository = postsRepository;
@@ -9,7 +11,7 @@ class UpdatePostService {
     );
 
     if (findPostIndex < 0) {
-      throw new Error({ status: 404, error: 'Could not find post' });
+      throw new AppError({ status: 404, error: 'Could not find post' });
     }
 
     this.postsRepository[findPostIndex].content = content;

@@ -1,3 +1,5 @@
+const AppError = require('../../../shared/errors/AppError');
+
 class AddLikeToPostService {
   constructor(postsRepository) {
     this.postsRepository = postsRepository;
@@ -9,7 +11,7 @@ class AddLikeToPostService {
     );
 
     if (findPostIndex < 0) {
-      throw new Error({
+      throw new AppError({
         status: 404,
         error: 'Cannot add like to non-existing post',
       });
