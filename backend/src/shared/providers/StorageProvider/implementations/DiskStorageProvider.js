@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-import uploadConfig from '../../../../config/upload';
+const uploadConfig = require('../../../../config/upload');
 
 class DiskStorageProvider {
   async saveFile(file) {
@@ -30,4 +30,6 @@ class DiskStorageProvider {
   }
 }
 
-module.exports = DiskStorageProvider;
+const diskStorageProvider = new DiskStorageProvider();
+
+module.exports = diskStorageProvider;

@@ -3,12 +3,14 @@ class ListPostsService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ user_id }) {
-    const userPosts = this.postsRepository.filter(
-      post => post.user_id === user_id,
-    );
+  async execute({ user_id }) {
+    try {
+      const userPosts = await this.postsRepository.list(user_id);
 
-    return userPosts;
+      return userPosts;
+    } catch (err) {
+      return err;
+    }
   }
 }
 

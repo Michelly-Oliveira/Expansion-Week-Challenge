@@ -7,21 +7,25 @@ class CreatePostService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ user_id, content }) {
-    const date = getCreationDate();
+  async execute({ user_id, content }) {
+    try {
+      const date = getCreationDate();
 
-    const post = {
-      id: uuid(),
-      content,
-      date,
-      comments: [],
-      likes: 0,
-      user_id,
-    };
+      const post = {
+        id: uuid(),
+        content,
+        date,
+        comments: [],
+        likes: 0,
+        user_id,
+      };
 
-    this.postsRepository.push(post);
+      await this.postsRepository.create(post);
 
-    return post;
+      return post;
+    } catch (err) {
+      return err;
+    }
   }
 }
 

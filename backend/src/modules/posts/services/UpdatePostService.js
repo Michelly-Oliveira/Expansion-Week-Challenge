@@ -5,20 +5,23 @@ class UpdatePostService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ post_id, content }) {
-    const findPostIndex = this.postsRepository.findIndex(
-      post => post.id === post_id,
-    );
+  async execute({ post_id, content }) {
+    try {
+      const findPostIndex = await this.postsRepository.findByIndex(post_id);
 
-    if (findPostIndex < 0) {
-      throw new AppError({ status: 404, error: 'Could not find post' });
+      if (findPostIndex < 0) {
+        throw new AppError({ status: 404, error: 'Could not find post' });
+      }
+
+      const updatedPost = await this.postsRepository.saveContent(
+        findPostIndex,
+        content,
+      );
+
+      return updatedPost;
+    } catch (err) {
+      return err;
     }
-
-    this.postsRepository[findPostIndex].content = content;
-
-    const updatedPost = this.postsRepository[findPostIndex];
-
-    return updatedPost;
   }
 }
 

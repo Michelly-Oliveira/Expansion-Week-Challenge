@@ -5,23 +5,23 @@ class AddLikeToPostService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ post_id }) {
-    const findPostIndex = this.postsRepository.findIndex(
-      post => post.id === post_id,
-    );
+  async execute({ post_id }) {
+    try {
+      const findPostIndex = await this.postsRepository.findByIndex(post_id);
 
-    if (findPostIndex < 0) {
-      throw new AppError({
-        status: 404,
-        error: 'Cannot add like to non-existing post',
-      });
+      if (findPostIndex < 0) {
+        throw new AppError({
+          status: 404,
+          error: 'Cannot add like to non-existing post',
+        });
+      }
+
+      const postToAddLike = await this.postsRepository.addLike(findPostIndex);
+
+      return postToAddLike;
+    } catch (err) {
+      return err;
     }
-
-    const postToAddLike = this.postsRepository[findPostIndex];
-
-    postToAddLike.likes++;
-
-    return postToAddLike;
   }
 }
 

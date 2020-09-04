@@ -2,30 +2,30 @@ const ListCommentsFromPostService = require('../../../services/ListCommentsFromP
 const AddCommentToPostService = require('../../../services/AddCommentToPostService');
 const DeleteCommentFromPostService = require('../../../services/DeleteCommentFromPostService');
 
-const postsRepository = require('../../../repositories/PostsRepository');
+const postsRepository = require('../../../repositories/fakes/FakePostsRepository');
 
 class CommentsController {
-  index(request, response) {
+  async index(request, response) {
     const { id } = request.params;
 
     const listCommentsFromPost = new ListCommentsFromPostService(
       postsRepository,
     );
 
-    const comments = listCommentsFromPost.execute({
+    const comments = await listCommentsFromPost.execute({
       post_id: id,
     });
 
     return response.json(comments);
   }
 
-  create(request, response) {
+  async create(request, response) {
     const { id } = request.params;
     const { content } = request.body;
 
     const addCommentToPost = new AddCommentToPostService(postsRepository);
 
-    const postWithComment = addCommentToPost.execute({
+    const postWithComment = await addCommentToPost.execute({
       post_id: id,
       content,
     });
@@ -33,14 +33,14 @@ class CommentsController {
     return response.json(postWithComment);
   }
 
-  delete(request, response) {
+  async delete(request, response) {
     const { id, comment_id } = request.params;
 
     const deleteCommentFromPost = new DeleteCommentFromPostService(
       postsRepository,
     );
 
-    deleteCommentFromPost.execute({
+    await deleteCommentFromPost.execute({
       post_id: id,
       comment_id,
     });

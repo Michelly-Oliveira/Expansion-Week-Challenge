@@ -5,16 +5,18 @@ class DeletePostService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ post_id }) {
-    const findPostIndex = this.postsRepository.findIndex(
-      post => post.id === post_id,
-    );
+  async execute({ post_id }) {
+    try {
+      const findPostIndex = await this.postsRepository.findByIndex(post_id);
 
-    if (findPostIndex < 0) {
-      throw new AppError({ status: 404, error: 'Could not find post' });
+      if (findPostIndex < 0) {
+        throw new AppError({ status: 404, error: 'Could not find post' });
+      }
+
+      await this.postsRepository.delete(findPostIndex);
+    } catch (err) {
+      return err;
     }
-
-    this.postsRepository.splice(findPostIndex, 1);
   }
 }
 

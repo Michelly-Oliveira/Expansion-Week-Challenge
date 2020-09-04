@@ -7,31 +7,36 @@ class CreateUserService {
     this.usersRepository = usersRepository;
   }
 
-  execute({ email, password, name }) {
-    // Check if email is already used
-    const findEmail = this.usersRepository.find(user => user.email === email);
+  async execute({ email, password, name }) {
+    try {
+      // Check if email is already used
+      const findEmail = await this.usersRepository.findByEmail(email);
 
-    if (findEmail) {
-      throw new AppError('Email already used');
+      if (findEmail) {
+        throw new AppError('Email already used');
+      }
+
+      // Check if name is already used
+      const findName = await this.usersRepository.findByName(name);
+
+      if (findName) {
+        throw new AppError('Name already used');
+      }
+
+      const user = {
+        id: uuid(),
+        // id: 'user_id',
+        email,
+        password,
+        name,
+      };
+
+      await this.usersRepository.create(user);
+
+      return user;
+    } catch (err) {
+      return err;
     }
-
-    // Check if name is already used
-    const findName = this.usersRepository.find(user => user.name === name);
-
-    if (findName) {
-      throw new AppError('Name already used');
-    }
-
-    const user = {
-      id: uuid(),
-      email,
-      password,
-      name,
-    };
-
-    this.usersRepository.push(user);
-
-    return user;
   }
 }
 

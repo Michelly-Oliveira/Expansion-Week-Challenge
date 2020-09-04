@@ -5,21 +5,23 @@ class ListCommentsFromPostService {
     this.postsRepository = postsRepository;
   }
 
-  execute({ post_id }) {
-    const findPostIndex = this.postsRepository.findIndex(
-      post => post.id === post_id,
-    );
+  async execute({ post_id }) {
+    try {
+      const findPostIndex = await this.postsRepository.findByIndex(post_id);
 
-    if (findPostIndex < 0) {
-      throw new AppError({
-        status: 404,
-        error: 'Cannot list comments from non-existing post',
-      });
+      if (findPostIndex < 0) {
+        throw new AppError({
+          status: 404,
+          error: 'Cannot list comments from non-existing post',
+        });
+      }
+
+      const comments = await this.postsRepository.listcomments(findPostIndex);
+
+      return comments;
+    } catch (err) {
+      return err;
     }
-
-    const comments = this.postsRepository[findPostIndex].comments;
-
-    return comments;
   }
 }
 

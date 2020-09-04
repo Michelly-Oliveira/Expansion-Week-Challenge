@@ -4,7 +4,7 @@ const multer = require('multer');
 
 const tmpFolder = path.resolve(__dirname, '..', '..', 'tmp');
 
-export default {
+module.exports = {
   // Folder where the files go right after being submitted
   tmpFolder,
   // Folder the files go after they have been saved

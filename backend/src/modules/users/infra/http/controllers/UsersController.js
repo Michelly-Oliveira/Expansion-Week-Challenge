@@ -1,14 +1,14 @@
 const CreateUserService = require('../../../services/CreateUserService');
 
-const usersRepository = require('../../../repositories/UsersRepository');
+const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
 
 class UsersController {
-  create(request, response) {
+  async create(request, response) {
     const { email, password, name } = request.body;
 
     const createUser = new CreateUserService(usersRepository);
 
-    const user = createUser.execute({
+    const user = await createUser.execute({
       email,
       password,
       name,
