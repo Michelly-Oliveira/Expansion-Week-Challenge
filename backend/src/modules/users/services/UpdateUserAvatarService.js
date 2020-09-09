@@ -10,7 +10,7 @@ class UpdateProfileService {
     try {
       const user = this.usersRepository.findById(user_id);
 
-      // Get the user id from the requesr object - so the user must be authenticated
+      // Get the user id from the request object - so the user must be authenticated
       if (!user) {
         throw new AppError('Only authenticated users can change avatar', 401);
       }

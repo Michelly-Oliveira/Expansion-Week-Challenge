@@ -16,6 +16,12 @@ class FakeUsersRepository {
     return user;
   }
 
+  async findByIndex(user_id) {
+    const findUserIndex = this.users.findIndex(user => user.id === user_id);
+
+    return findUserIndex;
+  }
+
   async findByEmail(email) {
     const findEmail = this.users.find(user => user.email === email);
 

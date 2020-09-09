@@ -1,5 +1,5 @@
 const UpdateProfileService = require('../../../services/UpdateProfileService');
-// const ShowProfileService = require('../../../services/ShowProfileService');
+const ShowProfileService = require('../../../services/ShowProfileService');
 
 const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
 
@@ -21,19 +21,18 @@ class ProfileController {
     return response.json(user);
   }
 
-  // show(request, response) {
-  //   const { email, password, name } = request.body;
+  async show(request, response) {
+    // Authenticated user
+    const { user_id } = request.params;
 
-  //   const createUser = new CreateUserService(usersRepository);
+    const showProfile = new ShowProfileService(usersRepository);
 
-  //   const user = createUser.execute({
-  //     email,
-  //     password,
-  //     name,
-  //   });
+    const user = await showProfile.execute({
+      user_id,
+    });
 
-  //   return response.json(user);
-  // }
+    return response.json(user);
+  }
 }
 
 module.exports = ProfileController;

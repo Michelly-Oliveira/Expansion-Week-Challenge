@@ -1,18 +1,21 @@
-const ListPostsService = require('../../../services/ListPostsService');
+const ListUserPostsService = require('../../../services/ListUserPostsService');
 const UpdatePostService = require('../../../services/UpdatePostService');
 const DeletePostService = require('../../../services/DeletePostService');
 
 const postsRepository = require('../../../repositories/fakes/FakePostsRepository');
+const usersRepository = require('../../../../users/repositories/fakes/FakeUsersRepository');
 
 class UserPostsController {
   // List all posts of a specific user
   async index(request, response) {
-    // for the moment will list all posts in the app
-    const user_id = 'who_wrote_the_post';
+    const { id } = request.params;
 
-    const listUserPosts = new ListPostsService(postsRepository);
+    const listUserPosts = new ListUserPostsService(
+      postsRepository,
+      usersRepository,
+    );
 
-    const posts = await listUserPosts.execute({ user_id });
+    const posts = await listUserPosts.execute({ user_id: id });
 
     return response.json(posts);
   }

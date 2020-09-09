@@ -25,10 +25,11 @@ class CreateUserService {
 
       const user = {
         id: uuid(),
-        // id: 'user_id',
         email,
         password,
         name,
+        following: [],
+        avatar: null,
       };
 
       await this.usersRepository.create(user);
