@@ -22,10 +22,7 @@ class CreatePostService {
       // Create image url and add that to the post
       const imagesUrl = images.map(image => `http://localhost:3333/${image}`);
 
-      Object.assign(content, {
-        ...content,
-        content_images: imagesUrl,
-      });
+      content.content_images = imagesUrl;
 
       const post = {
         id: uuid(),

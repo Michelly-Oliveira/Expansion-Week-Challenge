@@ -9,7 +9,7 @@ class PostsController {
     const images = request.files;
 
     const content_images = images.map(image => image.filename);
-    const { content_text } = text ? JSON.parse(text) : '';
+    const content_text = text ? JSON.parse(text).content_text : '';
 
     // While we don't have an user authenticated (will get its id from request.user.id), use a fixed user_id
     const user_id = 'who_wrote_the_post';
