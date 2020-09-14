@@ -3,8 +3,9 @@ const { uuid } = require('uuidv4');
 const AppError = require('../../../shared/errors/AppError');
 
 class CreateUserService {
-  constructor(usersRepository) {
+  constructor(usersRepository, hashProvider) {
     this.usersRepository = usersRepository;
+    this.hashProvider = hashProvider;
   }
 
   async execute({ email, password, name }) {
@@ -23,10 +24,12 @@ class CreateUserService {
         throw new AppError('Name already used');
       }
 
+      const hashedPassword = await this.hashProvider.generateHash(password);
+
       const user = {
         id: uuid(),
         email,
-        password,
+        password: hashedPassword,
         name,
         following: [],
         avatar: null,
