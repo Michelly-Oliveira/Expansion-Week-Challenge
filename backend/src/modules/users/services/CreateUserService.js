@@ -28,11 +28,12 @@ class CreateUserService {
 
       const user = {
         id: uuid(),
+        name,
         email,
         password: hashedPassword,
-        name,
         following: [],
         avatar: null,
+        avatar_url: null,
       };
 
       await this.usersRepository.create(user);

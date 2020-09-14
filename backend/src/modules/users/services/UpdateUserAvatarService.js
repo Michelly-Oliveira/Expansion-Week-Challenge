@@ -8,7 +8,7 @@ class UpdateProfileService {
 
   async execute({ user_id, avatarFileName }) {
     try {
-      const user = this.usersRepository.findById(user_id);
+      const user = await this.usersRepository.findById(user_id);
 
       // Get the user id from the request object - so the user must be authenticated
       if (!user) {
@@ -26,6 +26,7 @@ class UpdateProfileService {
 
       // Add new image to user field avatar
       user.avatar = fileName;
+      user.avatar_url = `http://localhost:3333/files/${fileName}`;
 
       // Update user data on database
       await this.usersRepository.save(user);
