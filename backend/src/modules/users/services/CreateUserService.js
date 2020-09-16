@@ -26,7 +26,7 @@ class CreateUserService {
 
       const hashedPassword = await this.hashProvider.generateHash(password);
 
-      const user = {
+      const user = await this.usersRepository.create({
         id: uuid(),
         name,
         email,
@@ -34,9 +34,7 @@ class CreateUserService {
         following: [],
         avatar: null,
         avatar_url: null,
-      };
-
-      await this.usersRepository.create(user);
+      });
 
       return user;
     } catch (err) {

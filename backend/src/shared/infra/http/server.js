@@ -1,10 +1,11 @@
 const express = require('express');
-// require('express-async-errors');
 const cors = require('cors');
 
 const routes = require('./routes/index');
 const AppError = require('../../errors/AppError');
 const uploadConfig = require('../../../config/upload');
+
+require('../sequelize');
 
 const app = express();
 

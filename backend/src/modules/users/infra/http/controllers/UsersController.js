@@ -2,7 +2,7 @@ const CreateUserService = require('../../../services/CreateUserService');
 
 const hashProvider = require('../../../providers/implementations/BCryptHashProvider');
 
-const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
+const usersRepository = require('../../sequelize/repositories/UsersRepository');
 
 class UsersController {
   async create(request, response) {
