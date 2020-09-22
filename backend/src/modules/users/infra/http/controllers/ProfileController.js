@@ -1,17 +1,21 @@
 const UpdateProfileService = require('../../../services/UpdateProfileService');
 const ShowProfileService = require('../../../services/ShowProfileService');
 
-const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
+const usersRepository = require('../../sequelize/repositories/UsersRepository');
+const hashProvider = require('../../../providers/implementations/BCryptHashProvider');
 
 class ProfileController {
   async update(request, response) {
-    // const user_id = 'user_id';
-    const { email, old_password, password, name, user_id } = request.body;
+    const { id } = request.user;
+    const { email, old_password, password, name } = request.body;
 
-    const updateProfile = new UpdateProfileService(usersRepository);
+    const updateProfile = new UpdateProfileService(
+      usersRepository,
+      hashProvider,
+    );
 
     const user = await updateProfile.execute({
-      user_id,
+      user_id: id,
       email,
       old_password,
       password,
@@ -23,12 +27,12 @@ class ProfileController {
 
   async show(request, response) {
     // Authenticated user
-    const { user_id } = request.params;
+    const { id } = request.params;
 
     const showProfile = new ShowProfileService(usersRepository);
 
     const user = await showProfile.execute({
-      user_id,
+      user_id: id,
     });
 
     return response.json(user);

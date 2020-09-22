@@ -2,11 +2,11 @@ const FollowAnotherUserService = require('../../../services/FollowAnotherUserSer
 const UnfollowAnotherUserService = require('../../../services/UnfollowAnotherUserService');
 const ListFollowingUsersService = require('../../../services/ListFollowingUsersService');
 
-const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
+const usersRepository = require('../../sequelize/repositories/UsersRepository');
 
 class FollowingUsersController {
   async create(request, response) {
-    const { id } = request.params;
+    const { id } = request.user;
     const { follow_user_id } = request.body;
 
     const followUser = new FollowAnotherUserService(usersRepository);
@@ -20,7 +20,7 @@ class FollowingUsersController {
   }
 
   async delete(request, response) {
-    const { id } = request.params;
+    const { id } = request.user;
     const { unfollow_user_id } = request.body;
 
     const unfollowUser = new UnfollowAnotherUserService(usersRepository);
@@ -34,7 +34,7 @@ class FollowingUsersController {
   }
 
   async index(request, response) {
-    const { id } = request.params;
+    const { id } = request.user;
 
     const followingUsers = new ListFollowingUsersService(usersRepository);
 

@@ -1,7 +1,7 @@
 const AddLikeToPostService = require('../../../services/AddLikeToPostService');
 const DeleteLikeFromPostService = require('../../../services/DeleteLikeFromPostService');
 
-const postsRepository = require('../../../repositories/fakes/FakePostsRepository');
+const postsRepository = require('../../sequelize/repositories/PostsRepository');
 
 class LikesController {
   async create(request, response) {

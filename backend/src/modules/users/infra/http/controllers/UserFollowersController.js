@@ -1,10 +1,10 @@
 const ListUserFollowersService = require('../../../services/ListUserFollowersService');
 
-const usersRepository = require('../../../repositories/fakes/FakeUsersRepository');
+const usersRepository = require('../../sequelize/repositories/UsersRepository');
 
 class UserFollowersController {
   async index(request, response) {
-    const { id } = request.params;
+    const { id } = request.user;
 
     const userFollowers = new ListUserFollowersService(usersRepository);
 

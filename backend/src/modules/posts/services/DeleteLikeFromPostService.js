@@ -7,18 +7,18 @@ class DeleteLikeFromPostService {
 
   async execute({ post_id }) {
     try {
-      const findPostIndex = await this.postsRepository.findByIndex(post_id);
+      const post = await this.postsRepository.findById(post_id);
 
-      if (findPostIndex < 0) {
+      if (!post) {
         throw new AppError({
           status: 404,
           error: 'Cannot delete like from non-existing post',
         });
       }
 
-      const post = await this.postsRepository.removeLike(findPostIndex);
+      const postRemovedLike = await this.postsRepository.removeLike(post);
 
-      return post;
+      return postRemovedLike;
     } catch (err) {
       return err;
     }

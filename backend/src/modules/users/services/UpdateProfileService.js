@@ -1,8 +1,9 @@
 const AppError = require('../../../shared/errors/AppError');
 
 class UpdateProfileService {
-  constructor(usersRepository) {
+  constructor(usersRepository, hashProvider) {
     this.usersRepository = usersRepository;
+    this.hashProvider = hashProvider;
   }
 
   async execute({ user_id, email, old_password, password, name }) {
@@ -43,18 +44,25 @@ class UpdateProfileService {
       // If the user wants to change the password but didn't provide the old password
       if (password && !old_password) {
         throw new AppError(
-          'You need to imform the old password to set a new password',
+          'You need to inform the old password to set a new password',
         );
       }
 
       // If the user wants to change the password
       if (password && old_password) {
         // Check if the old password provided by the user is correct
-        if (old_password !== user.password) {
+        const arePasswordsEqual = await this.hashProvider.compareHash(
+          old_password,
+          user.password,
+        );
+
+        if (!arePasswordsEqual) {
           throw new AppError('Current password incorrect');
         }
 
-        user.password = password;
+        const hashedPassword = await this.hashProvider.generateHash(password);
+
+        user.password = hashedPassword;
       }
 
       await this.usersRepository.save(user);

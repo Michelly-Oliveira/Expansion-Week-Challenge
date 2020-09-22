@@ -1,6 +1,6 @@
 const AppError = require('../../../shared/errors/AppError');
 
-class UpdateProfileService {
+class UpdateUserAvatarService {
   constructor(usersRepository, storageProvider) {
     this.usersRepository = usersRepository;
     this.storageProvider = storageProvider;
@@ -38,4 +38,4 @@ class UpdateProfileService {
   }
 }
 
-module.exports = UpdateProfileService;
+module.exports = UpdateUserAvatarService;

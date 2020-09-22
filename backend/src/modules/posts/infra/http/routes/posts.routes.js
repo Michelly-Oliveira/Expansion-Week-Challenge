@@ -2,6 +2,7 @@ const Router = require('express');
 const multer = require('multer');
 
 const uploadConfig = require('../../../../../config/upload');
+const ensureAuthenticate = require('../../../../users/infra/http/middlewares/ensureAuthenticate');
 const postsRouter = Router();
 
 const PostsController = require('../controllers/PostsController');
@@ -18,12 +19,13 @@ const commentsControllers = new CommentsController();
 
 const upload = multer(uploadConfig);
 
+postsRouter.use(ensureAuthenticate);
+
 postsRouter.get('/', userPostsControllers.index);
 
-// User must be authenticated to be able to interact with posts: create a middleware to ensure the user is authenticated
 postsRouter.post('/', upload.array('images'), postsControllers.create);
 
-postsRouter.put('/:id', userPostsControllers.update);
+postsRouter.put('/:id', upload.array('images'), userPostsControllers.update);
 
 postsRouter.delete('/:id', userPostsControllers.delete);
 

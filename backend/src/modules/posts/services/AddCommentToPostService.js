@@ -7,11 +7,11 @@ class AddCommentToPostService {
     this.postsRepository = postsRepository;
   }
 
-  async execute({ post_id, content }) {
+  async execute({ post_id, content, user_id }) {
     try {
-      const findPostIndex = await this.postsRepository.findByIndex(post_id);
+      const post = await this.postsRepository.findById(post_id);
 
-      if (findPostIndex < 0) {
+      if (!post) {
         throw new AppError({
           status: 404,
           error: 'Cannot add comment to non-existing post',
@@ -21,16 +21,19 @@ class AddCommentToPostService {
       const comment = {
         id: uuid(),
         content,
-        author: 'Who wrote the comment',
+        author: user_id,
       };
 
       const postToAddComment = await this.postsRepository.addComment(
-        findPostIndex,
+        post,
         comment,
       );
 
+      post.comments.push(comment);
+
       return postToAddComment;
     } catch (err) {
+      console.log(err);
       return err;
     }
   }

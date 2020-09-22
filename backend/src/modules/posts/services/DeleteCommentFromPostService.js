@@ -7,27 +7,29 @@ class DeleteCommentFromPostService {
 
   async execute({ post_id, comment_id }) {
     try {
-      const findPostIndex = await this.postsRepository.findByIndex(post_id);
+      const post = await this.postsRepository.findById(post_id);
 
-      if (findPostIndex < 0) {
+      if (!post) {
         throw new AppError({
           status: 404,
           error: 'Cannot delete comment from non-existing post',
         });
       }
 
-      const findComment = await this.postsRepository[
-        findPostIndex
-      ].comments.findIndex(comment => comment.id === comment_id);
+      const findCommentIndex = post.comments.findIndex(
+        comment => comment.id === comment_id,
+      );
 
-      if (findComment < 0) {
+      if (findCommentIndex < 0) {
         throw new AppError({
           status: 404,
           error: 'Cannot delete non-existing comment',
         });
       }
 
-      await this.posts.removeComment(findPostIndex, findComment);
+      await this.postsRepository.removeComment(post, findCommentIndex);
+
+      return { msg: 'Post deleted' };
     } catch (err) {
       return err;
     }

@@ -1,6 +1,6 @@
 const AppError = require('../../../shared/errors/AppError');
 
-class UnfollowAnotherUserSErvice {
+class UnfollowAnotherUserService {
   constructor(usersRepository) {
     this.usersRepository = usersRepository;
   }
@@ -27,6 +27,8 @@ class UnfollowAnotherUserSErvice {
 
       user.following = [...currentFollowing];
 
+      await this.usersRepository.save(user);
+
       return user;
     } catch (err) {
       return err;
@@ -34,4 +36,4 @@ class UnfollowAnotherUserSErvice {
   }
 }
 
-module.exports = UnfollowAnotherUserSErvice;
+module.exports = UnfollowAnotherUserService;

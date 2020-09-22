@@ -12,17 +12,19 @@ class CreatePostService {
     try {
       const date = getCreationDate();
 
-      // Save the images on storage
-      const images = content.content_images;
+      if (content.content_images.length > 0) {
+        // Save the images on storage
+        const images = content.content_images;
 
-      images.forEach(async image => {
-        await this.storageProvider.saveFile(image);
-      });
+        images.forEach(async image => {
+          await this.storageProvider.saveFile(image);
+        });
 
-      // Create image url and add that to the post
-      const imagesUrl = images.map(image => `http://localhost:3333/${image}`);
+        // Create image url and add that to the post
+        const imagesUrl = images.map(image => `http://localhost:3333/${image}`);
 
-      content.content_images = imagesUrl;
+        content.content_images = imagesUrl;
+      }
 
       const post = {
         id: uuid(),
@@ -43,8 +45,6 @@ class CreatePostService {
 }
 
 function getCreationDate() {
-  // 12 of August
-  // Maybe after we have a database use date in timestamp format
   const date = format(Date.now(), "dd 'de' MMMM", { locale: ptBR });
 
   return date;

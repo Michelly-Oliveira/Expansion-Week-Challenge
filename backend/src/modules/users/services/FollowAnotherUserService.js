@@ -17,7 +17,13 @@ class FollowAnotherUserService {
       }
 
       // Check if the user isn't already on the list
-      if (!user.following.join(', ').includes(follow_user_id)) {
+      if (
+        !user.following.join(', ').includes(follow_user_id) &&
+        follow_user_id !== user_id
+      ) {
+        // Update array on database
+        await this.usersRepository.updateFollowingArray(user, follow_user_id);
+        // Update array locally to show new array
         user.following.push(follow_user_id);
       }
 

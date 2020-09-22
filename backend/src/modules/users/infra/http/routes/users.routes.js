@@ -2,6 +2,7 @@ const Router = require('express');
 const multer = require('multer');
 
 const uploadConfig = require('../../../../../config/upload');
+const ensureAuthenticated = require('../middlewares/ensureAuthenticate');
 
 const UsersController = require('../controllers/UsersController');
 const UserAvatarController = require('../controllers/UserAvatarController');
@@ -18,16 +19,17 @@ const userFollowersController = new UserFollowersController();
 
 usersRouter.post('/', usersController.create);
 
-// User must be authenticated
+usersRouter.use(ensureAuthenticated);
+
 usersRouter.patch(
   '/avatar',
   upload.single('avatar'),
   userAvatarController.update,
 );
 
-usersRouter.post('/following/:id', followingUsersController.create);
-usersRouter.delete('/following/:id', followingUsersController.delete);
+usersRouter.post('/following', followingUsersController.create);
+usersRouter.delete('/following', followingUsersController.delete);
 
-usersRouter.get('/followers/:id', userFollowersController.index);
+usersRouter.get('/followers', userFollowersController.index);
 
 module.exports = usersRouter;

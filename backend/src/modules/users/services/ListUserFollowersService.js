@@ -14,7 +14,7 @@ class ListUserFollowersController {
       }
 
       // Loop through the usersRepository array, and for each user, loop through the following array and check if the user_id is there
-      const users = [...this.usersRepository.users];
+      const users = await this.usersRepository.listAllUsers();
 
       const followers = [];
 

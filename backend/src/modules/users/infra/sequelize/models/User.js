@@ -28,6 +28,7 @@ const User = db.define('User', {
   following: {
     allowNull: false,
     type: Sequelize.ARRAY(Sequelize.UUID),
+    defaultValue: [],
   },
 });
 

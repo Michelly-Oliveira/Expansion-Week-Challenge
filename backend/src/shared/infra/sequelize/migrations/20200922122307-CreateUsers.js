@@ -27,6 +27,7 @@ module.exports = {
       following: {
         allowNull: false,
         type: DataTypes.ARRAY(DataTypes.UUID),
+        defaultValue: [],
       },
       createdAt: {
         allowNull: false,

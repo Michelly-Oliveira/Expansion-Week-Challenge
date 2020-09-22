@@ -1,3 +1,4 @@
+const sequelize = require('../../../../../shared/infra/sequelize');
 const User = require('../models/User');
 
 class UsersRepository {
@@ -8,9 +9,30 @@ class UsersRepository {
   }
 
   async save(user) {
-    const updateUser = await User.save(user);
+    await user.save();
 
-    return updateUser;
+    return user;
+  }
+
+  async updateFollowingArray(user, newFollowing) {
+    await User.update(
+      {
+        following: sequelize.fn(
+          'array_append',
+          sequelize.col('following'),
+          newFollowing,
+        ),
+      },
+      { where: { id: user.id } },
+    );
+
+    return user;
+  }
+
+  async listAllUsers() {
+    const users = await User.findAll();
+
+    return users;
   }
 
   async findByIndex(user_id) {
@@ -42,7 +64,7 @@ class UsersRepository {
   }
 
   async findById(id) {
-    const findId = await Users.findByPk(id);
+    const findId = await User.findByPk(id);
 
     return findId;
   }
