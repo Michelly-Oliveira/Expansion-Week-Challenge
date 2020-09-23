@@ -6,22 +6,18 @@ class AddLikeToPostService {
   }
 
   async execute({ post_id }) {
-    try {
-      const post = await this.postsRepository.findById(post_id);
+    const post = await this.postsRepository.findById(post_id);
 
-      if (!post) {
-        throw new AppError({
-          status: 404,
-          error: 'Cannot add like to non-existing post',
-        });
-      }
-
-      const postToAddLike = await this.postsRepository.addLike(post);
-
-      return postToAddLike;
-    } catch (err) {
-      return err;
+    if (!post) {
+      throw new AppError({
+        status: 404,
+        error: 'Cannot add like to non-existing post',
+      });
     }
+
+    const postToAddLike = await this.postsRepository.addLike(post);
+
+    return postToAddLike;
   }
 }
 

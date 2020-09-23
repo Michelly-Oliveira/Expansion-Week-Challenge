@@ -6,31 +6,27 @@ class FollowAnotherUserService {
   }
 
   async execute({ user_id, follow_user_id }) {
-    try {
-      const user = await this.usersRepository.findById(user_id);
+    const user = await this.usersRepository.findById(user_id);
 
-      // Check if user exists
-      const userToFollow = await this.usersRepository.findById(follow_user_id);
+    // Check if user exists
+    const userToFollow = await this.usersRepository.findById(follow_user_id);
 
-      if (!userToFollow) {
-        throw new AppError('Cannot follow user that does not exist');
-      }
-
-      // Check if the user isn't already on the list
-      if (
-        !user.following.join(', ').includes(follow_user_id) &&
-        follow_user_id !== user_id
-      ) {
-        // Update array on database
-        await this.usersRepository.updateFollowingArray(user, follow_user_id);
-        // Update array locally to show new array
-        user.following.push(follow_user_id);
-      }
-
-      return user;
-    } catch (err) {
-      return err;
+    if (!userToFollow) {
+      throw new AppError('Cannot follow user that does not exist');
     }
+
+    // Check if the user isn't already on the list
+    if (
+      !user.following.join(', ').includes(follow_user_id) &&
+      follow_user_id !== user_id
+    ) {
+      // Update array on database
+      await this.usersRepository.updateFollowingArray(user, follow_user_id);
+      // Update array locally to show new array
+      user.following.push(follow_user_id);
+    }
+
+    return user;
   }
 }
 

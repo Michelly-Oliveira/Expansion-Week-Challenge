@@ -6,17 +6,13 @@ class ListFollowingUsersService {
   }
 
   async execute({ user_id }) {
-    try {
-      const user = await this.usersRepository.findById(user_id);
+    const user = await this.usersRepository.findById(user_id);
 
-      if (!user) {
-        throw new AppError('Cannot display users being followed');
-      }
-
-      return user.following;
-    } catch (err) {
-      return err;
+    if (!user) {
+      throw new AppError('Cannot display users being followed');
     }
+
+    return user.following;
   }
 }
 

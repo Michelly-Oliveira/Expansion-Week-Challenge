@@ -6,17 +6,13 @@ class DeletePostService {
   }
 
   async execute({ post_id }) {
-    try {
-      const post = await this.postsRepository.findById(post_id);
+    const post = await this.postsRepository.findById(post_id);
 
-      if (!post) {
-        throw new AppError({ status: 404, error: 'Could not find post' });
-      }
-
-      await this.postsRepository.delete(post);
-    } catch (err) {
-      return err;
+    if (!post) {
+      throw new AppError({ status: 404, error: 'Could not find post' });
     }
+
+    await this.postsRepository.delete(post);
   }
 }
 

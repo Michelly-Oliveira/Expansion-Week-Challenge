@@ -6,22 +6,18 @@ class DeleteLikeFromPostService {
   }
 
   async execute({ post_id }) {
-    try {
-      const post = await this.postsRepository.findById(post_id);
+    const post = await this.postsRepository.findById(post_id);
 
-      if (!post) {
-        throw new AppError({
-          status: 404,
-          error: 'Cannot delete like from non-existing post',
-        });
-      }
-
-      const postRemovedLike = await this.postsRepository.removeLike(post);
-
-      return postRemovedLike;
-    } catch (err) {
-      return err;
+    if (!post) {
+      throw new AppError({
+        status: 404,
+        error: 'Cannot delete like from non-existing post',
+      });
     }
+
+    const postRemovedLike = await this.postsRepository.removeLike(post);
+
+    return postRemovedLike;
   }
 }
 

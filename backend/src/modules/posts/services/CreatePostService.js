@@ -9,38 +9,34 @@ class CreatePostService {
   }
 
   async execute({ user_id, content }) {
-    try {
-      const date = getCreationDate();
+    const date = getCreationDate();
 
-      if (content.content_images.length > 0) {
-        // Save the images on storage
-        const images = content.content_images;
+    if (content.content_images.length > 0) {
+      // Save the images on storage
+      const images = content.content_images;
 
-        images.forEach(async image => {
-          await this.storageProvider.saveFile(image);
-        });
+      images.forEach(async image => {
+        await this.storageProvider.saveFile(image);
+      });
 
-        // Create image url and add that to the post
-        const imagesUrl = images.map(image => `http://localhost:3333/${image}`);
+      // Create image url and add that to the post
+      const imagesUrl = images.map(image => `http://localhost:3333/${image}`);
 
-        content.content_images = imagesUrl;
-      }
-
-      const post = {
-        id: uuid(),
-        content,
-        date,
-        comments: [],
-        likes: 0,
-        user_id,
-      };
-
-      await this.postsRepository.create(post);
-
-      return post;
-    } catch (err) {
-      return err;
+      content.content_images = imagesUrl;
     }
+
+    const post = {
+      id: uuid(),
+      content,
+      date,
+      comments: [],
+      likes: 0,
+      user_id,
+    };
+
+    await this.postsRepository.create(post);
+
+    return post;
   }
 }
 
