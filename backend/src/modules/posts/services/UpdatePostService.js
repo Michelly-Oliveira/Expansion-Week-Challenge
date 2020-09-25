@@ -10,7 +10,7 @@ class UpdatePostService {
     const post = await this.postsRepository.findById(post_id);
 
     if (!post) {
-      throw new AppError({ status: 404, error: 'Could not find post' });
+      throw new AppError({ status: 404, error: 'Cannot find post' });
     }
 
     if (content.content_images.length > 0) {

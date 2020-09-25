@@ -17,10 +17,7 @@ class UnfollowAnotherUserService {
       throw new AppError('Cannot unfollow user that does not exist');
     }
 
-    // Create another variable to store the array of ids while there is no database/repository, so we can use the methods for arrays
-    const followingUsers = [...user.following];
-
-    const currentFollowing = followingUsers.filter(
+    const currentFollowing = user.following.filter(
       followingUserId => followingUserId !== unfollow_user_id,
     );
 

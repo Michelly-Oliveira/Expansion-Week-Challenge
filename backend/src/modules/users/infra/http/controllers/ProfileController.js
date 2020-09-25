@@ -16,10 +16,10 @@ class ProfileController {
 
     const user = await updateProfile.execute({
       user_id: id,
+      name,
       email,
       old_password,
       password,
-      name,
     });
 
     return response.json(user);
@@ -27,7 +27,7 @@ class ProfileController {
 
   async show(request, response) {
     // Authenticated user
-    const { id } = request.params;
+    const { id } = request.user;
 
     const showProfile = new ShowProfileService(usersRepository);
 

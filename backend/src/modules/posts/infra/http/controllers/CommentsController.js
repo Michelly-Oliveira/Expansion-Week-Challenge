@@ -6,14 +6,14 @@ const postsRepository = require('../../sequelize/repositories/PostsRepository');
 
 class CommentsController {
   async index(request, response) {
-    const { id } = request.params;
+    const { post_id } = request.params;
 
     const listCommentsFromPost = new ListCommentsFromPostService(
       postsRepository,
     );
 
     const comments = await listCommentsFromPost.execute({
-      post_id: id,
+      post_id,
     });
 
     return response.json(comments);
@@ -21,7 +21,7 @@ class CommentsController {
 
   async create(request, response) {
     const { id } = request.user;
-    const post_id = request.params.id;
+    const { post_id } = request.params;
     const { content } = request.body;
 
     const addCommentToPost = new AddCommentToPostService(postsRepository);
@@ -36,18 +36,18 @@ class CommentsController {
   }
 
   async delete(request, response) {
-    const { id, comment_id } = request.params;
+    const { post_id, comment_id } = request.params;
 
     const deleteCommentFromPost = new DeleteCommentFromPostService(
       postsRepository,
     );
 
     await deleteCommentFromPost.execute({
-      post_id: id,
+      post_id,
       comment_id,
     });
 
-    return response.send({ msg: 'Comment removed' });
+    return response.json(deleteCommentFromPost);
   }
 }
 

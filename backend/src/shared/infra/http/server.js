@@ -3,6 +3,7 @@ require('express-async-errors');
 
 const express = require('express');
 const cors = require('cors');
+const { errors } = require('celebrate');
 
 const routes = require('./routes/index');
 const AppError = require('../../errors/AppError');
@@ -16,6 +17,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
+
+app.use(errors());
 
 // Middleware to handle errors
 app.use((err, request, response, nextFunction) => {

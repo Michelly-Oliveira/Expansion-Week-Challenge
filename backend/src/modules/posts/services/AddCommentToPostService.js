@@ -23,14 +23,16 @@ class AddCommentToPostService {
       author: user_id,
     };
 
-    const postToAddComment = await this.postsRepository.addComment(
+    // Add comment to database
+    const postWithNewComment = await this.postsRepository.addComment(
       post,
       comment,
     );
 
+    // Add comment locally - otherwise need to make another call to the database to display the newly added comment
     post.comments.push(comment);
 
-    return postToAddComment;
+    return postWithNewComment;
   }
 }
 

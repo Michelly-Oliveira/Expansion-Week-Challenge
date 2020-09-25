@@ -17,7 +17,7 @@ class ListUserPostsService {
     // Get the posts from that user
     const posts = await this.postsRepository.list(user_id);
 
-    // Return user data and posts
+    // Return posts
     return posts;
   }
 }

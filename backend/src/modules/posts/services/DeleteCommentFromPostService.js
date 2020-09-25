@@ -15,20 +15,20 @@ class DeleteCommentFromPostService {
       });
     }
 
-    const findCommentIndex = post.comments.findIndex(
+    const commentIndex = post.comments.findIndex(
       comment => comment.id === comment_id,
     );
 
-    if (findCommentIndex < 0) {
+    if (commentIndex < 0) {
       throw new AppError({
         status: 404,
         error: 'Cannot delete non-existing comment',
       });
     }
 
-    await this.postsRepository.removeComment(post, findCommentIndex);
+    await this.postsRepository.removeComment(post, commentIndex);
 
-    return { msg: 'Post deleted' };
+    return { msg: 'Comment deleted' };
   }
 }
 

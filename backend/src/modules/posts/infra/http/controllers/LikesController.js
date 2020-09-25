@@ -5,24 +5,24 @@ const postsRepository = require('../../sequelize/repositories/PostsRepository');
 
 class LikesController {
   async create(request, response) {
-    const { id } = request.params;
+    const { post_id } = request.params;
 
     const addLikeToPost = new AddLikeToPostService(postsRepository);
 
-    const postWithOneMoreLike = await addLikeToPost.execute({
-      post_id: id,
+    const post = await addLikeToPost.execute({
+      post_id,
     });
 
-    return response.json(postWithOneMoreLike);
+    return response.json(post);
   }
 
   async delete(request, response) {
-    const { id } = request.params;
+    const { post_id } = request.params;
 
     const deleteLikeFromPost = new DeleteLikeFromPostService(postsRepository);
 
     const post = await deleteLikeFromPost.execute({
-      post_id: id,
+      post_id,
     });
 
     return response.json(post);

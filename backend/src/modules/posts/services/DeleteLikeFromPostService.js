@@ -11,13 +11,13 @@ class DeleteLikeFromPostService {
     if (!post) {
       throw new AppError({
         status: 404,
-        error: 'Cannot delete like from non-existing post',
+        error: 'Cannot remove like from non-existing post',
       });
     }
 
-    const postRemovedLike = await this.postsRepository.removeLike(post);
+    const postWithRemovedLike = await this.postsRepository.removeLike(post);
 
-    return postRemovedLike;
+    return postWithRemovedLike;
   }
 }
 

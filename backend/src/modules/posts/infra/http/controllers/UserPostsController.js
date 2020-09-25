@@ -22,8 +22,7 @@ class UserPostsController {
   }
 
   async update(request, response) {
-    // post id
-    const { id } = request.params;
+    const { post_id } = request.params;
     const { text } = request.body;
     const images = request.files;
 
@@ -33,7 +32,7 @@ class UserPostsController {
     const updatePost = new UpdatePostService(postsRepository, storageProvider);
 
     const post = await updatePost.execute({
-      post_id: id,
+      post_id,
       content: {
         content_text,
         content_images,
@@ -44,12 +43,12 @@ class UserPostsController {
   }
 
   async delete(request, response) {
-    const { id } = request.params;
+    const { post_id } = request.params;
 
     const deletePost = new DeletePostService(postsRepository);
 
     await deletePost.execute({
-      post_id: id,
+      post_id,
     });
 
     return response.json(deletePost);

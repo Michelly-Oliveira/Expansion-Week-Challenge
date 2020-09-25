@@ -56,7 +56,7 @@ class UpdateProfileService {
       );
 
       if (!arePasswordsEqual) {
-        throw new AppError('Current password incorrect');
+        throw new AppError('Old password does not match');
       }
 
       const hashedPassword = await this.hashProvider.generateHash(password);

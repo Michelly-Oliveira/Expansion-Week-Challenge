@@ -1,5 +1,6 @@
 const Router = require('express');
 const multer = require('multer');
+const { celebrate, Segments, Joi } = require('celebrate');
 
 const uploadConfig = require('../../../../../config/upload');
 const ensureAuthenticated = require('../middlewares/ensureAuthenticate');
@@ -17,7 +18,17 @@ const userAvatarController = new UserAvatarController();
 const followingUsersController = new FollowingUsersController();
 const userFollowersController = new UserFollowersController();
 
-usersRouter.post('/', usersController.create);
+usersRouter.post(
+  '/',
+  celebrate({
+    [Segments.BODY]: {
+      name: Joi.string().required(),
+      email: Joi.string().email().required(),
+      password: Joi.string().required(),
+    },
+  }),
+  usersController.create,
+);
 
 usersRouter.use(ensureAuthenticated);
 
@@ -28,6 +39,7 @@ usersRouter.patch(
 );
 
 usersRouter.post('/following', followingUsersController.create);
+
 usersRouter.delete('/following', followingUsersController.delete);
 
 usersRouter.get('/followers', userFollowersController.index);

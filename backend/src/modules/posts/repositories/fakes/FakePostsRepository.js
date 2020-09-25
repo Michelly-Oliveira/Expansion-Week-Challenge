@@ -16,12 +16,6 @@ class FakePostsRepository {
     return updatedPost;
   }
 
-  async findByIndex(post_id) {
-    const findPostIndex = this.posts.findIndex(post => post.id === post_id);
-
-    return findPostIndex;
-  }
-
   async delete(post_index) {
     this.posts.splice(post_index, 1);
   }
