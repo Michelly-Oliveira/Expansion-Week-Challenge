@@ -7,7 +7,7 @@ const ensureAuthenticated = require('../middlewares/ensureAuthenticate');
 
 const UsersController = require('../controllers/UsersController');
 const UserAvatarController = require('../controllers/UserAvatarController');
-const FollowingUsersController = require('../controllers/FollowingUsersController');
+const FollowUsersController = require('../controllers/FollowUsersController');
 const UserFollowersController = require('../controllers/UserFollowersController');
 
 const usersRouter = Router();
@@ -15,7 +15,7 @@ const upload = multer(uploadConfig);
 
 const usersController = new UsersController();
 const userAvatarController = new UserAvatarController();
-const followingUsersController = new FollowingUsersController();
+const followUsersController = new FollowUsersController();
 const userFollowersController = new UserFollowersController();
 
 usersRouter.post(
@@ -38,9 +38,9 @@ usersRouter.patch(
   userAvatarController.update,
 );
 
-usersRouter.post('/following', followingUsersController.create);
+usersRouter.post('/follow', followUsersController.create);
 
-usersRouter.delete('/following', followingUsersController.delete);
+usersRouter.delete('/follow', followUsersController.delete);
 
 usersRouter.get('/followers', userFollowersController.index);
 

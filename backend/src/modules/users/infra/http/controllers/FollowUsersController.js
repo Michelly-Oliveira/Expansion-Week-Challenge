@@ -4,7 +4,7 @@ const ListFollowingUsersService = require('../../../services/ListFollowingUsersS
 
 const usersRepository = require('../../sequelize/repositories/UsersRepository');
 
-class FollowingUsersController {
+class FollowUsersController {
   async create(request, response) {
     const { id } = request.user;
     const { follow_user_id } = request.body;
@@ -46,4 +46,4 @@ class FollowingUsersController {
   }
 }
 
-module.exports = FollowingUsersController;
+module.exports = FollowUsersController;

@@ -10,7 +10,7 @@ const routes = Router();
 routes.use('/posts', postsRouter);
 
 routes.use('/users', usersRouter);
-routes.use('/sessions', sessionsRouter);
+routes.use('/session', sessionsRouter);
 routes.use('/profile', profileRouter);
 
 module.exports = routes;

@@ -22,7 +22,7 @@ module.exports = {
       },
       likes: {
         allowNull: false,
-        type: DataTypes.INTEGER,
+        type: DataTypes.ARRAY(DataTypes.STRING),
       },
       date: {
         allowNull: false,

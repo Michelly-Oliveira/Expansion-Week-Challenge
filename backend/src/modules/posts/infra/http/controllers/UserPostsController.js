@@ -22,6 +22,7 @@ class UserPostsController {
   }
 
   async update(request, response) {
+    const { id } = request.user;
     const { post_id } = request.params;
     const { text } = request.body;
     const images = request.files;
@@ -37,21 +38,24 @@ class UserPostsController {
         content_text,
         content_images,
       },
+      user_id: id,
     });
 
     return response.json(post);
   }
 
   async delete(request, response) {
+    const { id } = request.user;
     const { post_id } = request.params;
 
     const deletePost = new DeletePostService(postsRepository);
 
-    await deletePost.execute({
+    const deleted = await deletePost.execute({
       post_id,
+      user_id: id,
     });
 
-    return response.json(deletePost);
+    return response.json(deleted);
   }
 }
 

@@ -30,7 +30,7 @@ class CreatePostService {
       content,
       date,
       comments: [],
-      likes: 0,
+      likes: [],
       user_id,
     };
 

@@ -23,7 +23,7 @@ const Post = db.define('Post', {
   },
   likes: {
     allowNull: false,
-    type: Sequelize.INTEGER,
+    type: Sequelize.ARRAY(Sequelize.JSON),
   },
   date: {
     allowNull: false,

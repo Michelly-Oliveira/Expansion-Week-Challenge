@@ -5,7 +5,7 @@ class DeleteLikeFromPostService {
     this.postsRepository = postsRepository;
   }
 
-  async execute({ post_id }) {
+  async execute({ post_id, user_id }) {
     const post = await this.postsRepository.findById(post_id);
 
     if (!post) {
@@ -15,9 +15,15 @@ class DeleteLikeFromPostService {
       });
     }
 
-    const postWithRemovedLike = await this.postsRepository.removeLike(post);
+    const usersThatLikedPost = post.likes.filter(
+      userLike => userLike !== user_id,
+    );
 
-    return postWithRemovedLike;
+    post.likes = [...usersThatLikedPost];
+
+    await this.postsRepository.save(post);
+
+    return post;
   }
 }
 

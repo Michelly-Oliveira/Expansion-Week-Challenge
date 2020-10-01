@@ -42,12 +42,12 @@ class CommentsController {
       postsRepository,
     );
 
-    await deleteCommentFromPost.execute({
+    const deleted = await deleteCommentFromPost.execute({
       post_id,
       comment_id,
     });
 
-    return response.json(deleteCommentFromPost);
+    return response.json(deleted);
   }
 }
 

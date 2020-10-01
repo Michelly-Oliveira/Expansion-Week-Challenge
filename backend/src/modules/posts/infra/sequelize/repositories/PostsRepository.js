@@ -8,9 +8,7 @@ class PostsRepository {
     return createPost;
   }
 
-  async saveContent(post, content) {
-    post.content = content;
-
+  async save(post) {
     await post.save();
 
     return post;
@@ -36,23 +34,33 @@ class PostsRepository {
     return posts;
   }
 
-  async addLike(post) {
-    post.likes++;
-
-    await post.save();
-
-    return post;
-  }
-
-  async removeLike(post) {
-    if (post.likes > 0) {
-      post.likes--;
-
-      await post.save();
-    }
+  async addLike(post, user_id) {
+    await Post.update(
+      {
+        likes: sequelize.fn('array_append', sequelize.col('likes'), user_id),
+      },
+      { where: { id: post.id } },
+    );
 
     return post;
   }
+
+  // async removeLike(post, user_id) {
+  //   post.comments.splice(comment_index, 1);
+
+  //   await Post.update(
+  //     {
+  //       likes: sequelize.fn(
+  //         'array_append',
+  //         sequelize.col('likes'),
+  //         user_id,
+  //       ),
+  //     },
+  //     { where: { id: post.id } },
+  //   );
+
+  //   return post;
+  // }
 
   async addComment(post, newComment) {
     await Post.update(

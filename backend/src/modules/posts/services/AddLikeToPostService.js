@@ -5,7 +5,7 @@ class AddLikeToPostService {
     this.postsRepository = postsRepository;
   }
 
-  async execute({ post_id }) {
+  async execute({ post_id, user_id }) {
     const post = await this.postsRepository.findById(post_id);
 
     if (!post) {
@@ -15,7 +15,13 @@ class AddLikeToPostService {
       });
     }
 
-    const postToAddLike = await this.postsRepository.addLike(post);
+    if (post.likes.join(', ').includes(user_id)) {
+      return post;
+    }
+
+    const postToAddLike = await this.postsRepository.addLike(post, user_id);
+
+    postToAddLike.like.push(user_id);
 
     return postToAddLike;
   }

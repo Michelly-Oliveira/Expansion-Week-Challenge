@@ -6,11 +6,18 @@ class UpdatePostService {
     this.storageProvider = storageProvider;
   }
 
-  async execute({ post_id, content }) {
+  async execute({ post_id, content, user_id }) {
     const post = await this.postsRepository.findById(post_id);
 
     if (!post) {
       throw new AppError({ status: 404, error: 'Cannot find post' });
+    }
+
+    if (post.user_id !== user_id) {
+      throw new AppError({
+        status: 401,
+        error: 'You do not have permission to edit this post',
+      });
     }
 
     if (content.content_images.length > 0) {
@@ -27,7 +34,9 @@ class UpdatePostService {
       content.content_images = imagesUrl;
     }
 
-    const updatedPost = await this.postsRepository.saveContent(post, content);
+    post.content = content;
+
+    const updatedPost = await this.postsRepository.save(post);
 
     return updatedPost;
   }
