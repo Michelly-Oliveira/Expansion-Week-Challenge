@@ -25,9 +25,7 @@ const Tweet = () => {
         <Avatar />
         <Content>
           <Header>
-            <strong>Adilson</strong>
-            <span>@adilsonvicente</span>
-            <Dot />
+            <strong>Michelly</strong>
             <time>17 de julho</time>
           </Header>
 
