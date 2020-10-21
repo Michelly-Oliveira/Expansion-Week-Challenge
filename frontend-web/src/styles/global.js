@@ -1,6 +1,21 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
+  :root {
+    --primary: #000;
+    --secondary: #15181C;
+    --search: #202327;
+    --white: #D9D9D9;
+    --gray: #7A7A7A;
+    --outline: #2F3336;
+    --retweet: #00C06B;
+    --like: #EB265E;
+    --twitter: #33A1F2;
+    --twitter-dark-hover: #011017;
+    --twitter-light-hover: #2C8ED6;
+
+  }
+
   * {
     margin: 0;
     padding: 0;
@@ -18,12 +33,6 @@ export default createGlobalStyle`
     height: 100%;
   }
 
-  /* body{
-    background: #e6ecf0;
-    font-size: 14px;
-    -webkit-font-smoothing: antialiased;
-  } */
-
   body, input, button {
     border: 0;
     background: none;
@@ -33,21 +42,6 @@ export default createGlobalStyle`
 
   html {
     background: var(--primary);
-  }
-
-  :root {
-    --primary: #000;
-    --secondary: #15181C;
-    --search: #202327;
-    --white: #D9D9D9;
-    --gray: #7A7A7A;
-    --outline: #2F3336;
-    --retweet: #00C06B;
-    --like: #EB265E;
-    --twitter: #33A1F2;
-    --twitter-dark-hover: #011017;
-    --twitter-light-hover: #2C8ED6;
-
   }
 
   h1, h2, h3, h4, h5, h6 strong {
