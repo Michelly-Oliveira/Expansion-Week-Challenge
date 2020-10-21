@@ -3,7 +3,6 @@ import StickyBox from 'react-sticky-box';
 
 import List from '../../components/List';
 import FollowSugestion from '../../components/FollowSugestion';
-import News from '../../components/News';
 
 import {
   Container,
@@ -30,11 +29,6 @@ const SideBar = () => {
               <FollowSugestion name="Guilherme" nickname="@Guilherme2625" />,
               <FollowSugestion name="Rellyson" nickname="@Rellyson5270" />,
             ]}
-          />
-
-          <List
-            title="O que está acontecendo..."
-            elements={[<News />, <News />, <News />]}
           />
         </Body>
       </StickyBox>

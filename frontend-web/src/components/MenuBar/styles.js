@@ -77,25 +77,6 @@ export const MenuButton = styled.button`
   & + button {
     margin-top: 16.5px;
   }
-  & + button:last-child {
-    margin-top: 33px;
-
-    width: 40px;
-    height: 40px;
-
-    > span {
-      display: none;
-    }
-
-    @media (min-width: 1080px) {
-      width: 100%;
-      height: unset;
-
-      > span {
-        display: inline;
-      }
-    }
-  }
 
   cursor: pointer;
   border-radius: 25px;
@@ -126,72 +107,22 @@ export const HomeIcon = styled(Home)`
   ${iconCss}
 `;
 
-export const BellIcon = styled(Notifications)`
-  ${iconCss}
-`;
-
-export const EmailIcon = styled(Email)`
-  ${iconCss}
-`;
-
-export const FavoriteIcon = styled(FavoriteBorder)`
-  ${iconCss}
-`;
-
 export const ProfileIcon = styled(Person)`
   ${iconCss}
 `;
 
-export const Botside = styled.div`
-  margin-top: 20px;
-
-  display: flex;
-  align-items: center;
-`;
-
-export const Avatar = styled.div`
-  width: 39px;
-  height: 39px;
-
-  flex-shrink: 0;
-
-  border-radius: 50%;
-  background: var(--gray);
-`;
-
-export const ProfileData = styled.div`
-  display: none;
-
-  @media (min-width: 1080px) {
-    display: flex;
-    flex-direction: column;
-
-    margin-left: 10px;
-    font-size: 14px;
-
-    > span {
-      color: var(--gray);
-    }
-  }
-`;
-
 export const ExitIcon = styled(ExitToApp)`
-  display: none;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
 
-  @media (min-width: 1080px) {
-    display: inline-block;
-    width: 25px;
-    height: 25px;
+  color: var(--white);
 
-    color: var(--white);
-    margin-left: 30px;
+  cursor: pointer;
 
-    cursor: pointer;
-
-    &:hover {
-      > path {
-        color: var(--like);
-      }
+  &:hover {
+    > path {
+      color: var(--like);
     }
   }
 `;

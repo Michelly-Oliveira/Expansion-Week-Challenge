@@ -30,41 +30,20 @@ const MenuBar = () => {
           <span>Página Inicial</span>
         </MenuButton>
 
-        <MenuButton>
-          <BellIcon />
-          <span>Notificações</span>
-        </MenuButton>
-
-        <MenuButton>
-          <EmailIcon />
-          <span>Mensagens</span>
-        </MenuButton>
-
-        <MenuButton>
-          <FavoriteIcon />
-          <span>Favoritados</span>
-        </MenuButton>
-
         <MenuButton className="active">
           <ProfileIcon />
           <span>Perfil</span>
         </MenuButton>
 
+        <MenuButton>
+          <ExitIcon />
+          <span>Logout</span>
+        </MenuButton>
+
         <Button>
-          <span>Tweetar</span>
+          <span>Tweet</span>
         </Button>
       </Topside>
-
-      <Botside>
-        <Avatar />
-
-        <ProfileData>
-          <strong>Adilson Vicente</strong>
-          <span>@adilsonvicente</span>
-        </ProfileData>
-
-        <ExitIcon />
-      </Botside>
     </Container>
   );
 };
