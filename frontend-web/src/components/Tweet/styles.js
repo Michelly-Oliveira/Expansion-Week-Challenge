@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { Chat, Rocketseat, Favorite } from '../../styles/Icons';
+import { Chat, Favorite } from '../../styles/Icons';
 
 export const Container = styled.div`
   display: flex;
@@ -71,13 +71,6 @@ export const Header = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
   }
-`;
-
-export const Dot = styled.div`
-  background: bar(--gray);
-  width: 2px;
-  height: 2px;
-  margin: 0 10px;
 `;
 
 export const Description = styled.p`
@@ -161,7 +154,7 @@ export const CommentIcon = styled(Chat)`
   ${iconCss}
 `;
 
-export const RetweetIcon = styled(Rocketseat)`
+export const RetweetIcon = styled(Chat)`
   ${iconCss}
 `;
 

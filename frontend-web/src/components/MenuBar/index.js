@@ -8,13 +8,7 @@ import {
   Logo,
   MenuButton,
   HomeIcon,
-  BellIcon,
-  EmailIcon,
-  FavoriteIcon,
   ProfileIcon,
-  Botside,
-  Avatar,
-  ProfileData,
   ExitIcon,
 } from './styles';
 

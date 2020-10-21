@@ -1,14 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Twitter } from 'styled-icons/boxicons-logos';
 
-import {
-  Home,
-  Notifications,
-  Email,
-  FavoriteBorder,
-  Person,
-  ExitToApp,
-} from '../../styles/Icons';
+import { Home, Person, ExitToApp } from '../../styles/Icons';
 
 export const Container = styled.div`
   display: none;
