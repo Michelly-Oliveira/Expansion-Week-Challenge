@@ -7,9 +7,10 @@ import {
   EmailIcon,
   PasswordIcon,
   LoginIcon,
+  UsernameIcon,
 } from './style';
 
-const Login = () => {
+const SignUp = () => {
   return (
     <Container>
       <Logo>
@@ -17,7 +18,12 @@ const Login = () => {
       </Logo>
 
       <Form>
-        <h2>Faça seu login</h2>
+        <h2>Crie sua conta</h2>
+
+        <div>
+          <UsernameIcon />
+          <input type="text" placeholder="Username" />
+        </div>
 
         <div>
           <EmailIcon />
@@ -29,15 +35,15 @@ const Login = () => {
           <input type="password" placeholder="Senha" />
         </div>
 
-        <button>Entrar</button>
+        <button>Cadastrar</button>
 
-        <a href="/signup">
+        <a href="/login">
           <LoginIcon />
-          Criar conta
+          Faça login
         </a>
       </Form>
     </Container>
   );
 };
 
-export default Login;
+export default SignUp;
