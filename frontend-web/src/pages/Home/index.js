@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiArrowBack } from 'react-icons/bi';
 
 import {
   Container,
@@ -6,7 +7,6 @@ import {
   MainContainer,
   Header,
   Button,
-  BackIcon,
   ProfileInfo,
   ProfileContainer,
   Banner,
@@ -31,7 +31,7 @@ const Home = () => {
         <MainContainer>
           <Header>
             <Button>
-              <BackIcon />
+              <BiArrowBack />
             </Button>
 
             <ProfileInfo>

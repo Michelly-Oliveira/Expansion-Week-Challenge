@@ -1,7 +1,4 @@
-import styled, { css } from 'styled-components';
-import { Twitter } from 'styled-icons/boxicons-logos';
-
-import { Home, Person, ExitToApp } from '../../styles/Icons';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: none;
@@ -32,15 +29,21 @@ export const Topside = styled.div`
   }
 `;
 
-export const Logo = styled(Twitter)`
-  width: 41px;
-  height: 41px;
+export const Logo = styled.div`
+  width: 45px;
+  height: 45px;
 
   > path {
     fill: var(--twitter);
   }
 
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+    fill: var(--twitter);
+  }
 `;
 
 export const MenuButton = styled.button`
@@ -78,44 +81,19 @@ export const MenuButton = styled.button`
     background: var(--twitter-dark-hover);
   }
 
+  svg {
+    flex-shrink: 0;
+
+    width: 25px;
+    height: 25px;
+    color: var(--white);
+  }
+
   &:hover,
   &.active {
     span,
     svg {
-      color: var(--twitter);
       fill: var(--twitter);
-    }
-  }
-`;
-
-const iconCss = css`
-  flex-shrink: 0;
-
-  width: 30px;
-  height: 30px;
-  color: var(--white);
-`;
-
-export const HomeIcon = styled(Home)`
-  ${iconCss}
-`;
-
-export const ProfileIcon = styled(Person)`
-  ${iconCss}
-`;
-
-export const ExitIcon = styled(ExitToApp)`
-  display: inline-block;
-  width: 30px;
-  height: 30px;
-
-  color: var(--white);
-
-  cursor: pointer;
-
-  &:hover {
-    > path {
-      color: var(--like);
     }
   }
 `;

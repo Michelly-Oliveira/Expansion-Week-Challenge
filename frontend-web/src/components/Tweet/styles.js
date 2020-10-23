@@ -1,6 +1,4 @@
-import styled, { css } from 'styled-components';
-
-import { Chat, Favorite } from '../../styles/Icons';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -120,6 +118,8 @@ export const Status = styled.div`
 
   > svg {
     margin-right: 5px;
+    width: 19px;
+    height: 19px;
   }
 
   &:nth-child(1) {
@@ -136,6 +136,7 @@ export const Status = styled.div`
       fill: var(--retweet);
     }
   }
+
   &:nth-child(3) {
     color: var(--like);
 
@@ -143,21 +144,4 @@ export const Status = styled.div`
       fill: var(--like);
     }
   }
-`;
-
-const iconCss = css`
-  width: 19px;
-  height: 19px;
-`;
-
-export const CommentIcon = styled(Chat)`
-  ${iconCss}
-`;
-
-export const RetweetIcon = styled(Chat)`
-  ${iconCss}
-`;
-
-export const LikeIcon = styled(Favorite)`
-  ${iconCss}
 `;

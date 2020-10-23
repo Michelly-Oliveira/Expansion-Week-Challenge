@@ -1,14 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { FiMail, FiLock, FiUser, FiLogIn } from 'react-icons/fi';
 
-import {
-  Container,
-  Logo,
-  Form,
-  EmailIcon,
-  PasswordIcon,
-  LoginIcon,
-  UsernameIcon,
-} from './style';
+import Input from '../../components/Input';
+
+import { Container, Logo, Form } from './style';
 
 const SignUp = () => {
   return (
@@ -20,27 +16,28 @@ const SignUp = () => {
       <Form>
         <h2>Crie sua conta</h2>
 
-        <div>
-          <UsernameIcon />
-          <input type="text" placeholder="Username" />
-        </div>
+        <Input
+          icon={FiUser}
+          name="username"
+          type="text"
+          placeholder="Nome de usuário"
+        />
 
-        <div>
-          <EmailIcon />
-          <input type="email" placeholder="E-mail" />
-        </div>
+        <Input icon={FiMail} name="email" type="email" placeholder="E-mail" />
 
-        <div>
-          <PasswordIcon />
-          <input type="password" placeholder="Senha" />
-        </div>
+        <Input
+          icon={FiLock}
+          name="password"
+          type="password"
+          placeholder="Senha"
+        />
 
         <button>Cadastrar</button>
 
-        <a href="/login">
-          <LoginIcon />
+        <Link to="/login">
+          <FiLogIn />
           Faça login
-        </a>
+        </Link>
       </Form>
     </Container>
   );

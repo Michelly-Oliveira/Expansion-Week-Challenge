@@ -1,36 +1,32 @@
 import React from 'react';
+import { FaHome, FaUser, FaTwitter } from 'react-icons/fa';
+import { HiLogout } from 'react-icons/hi';
 
 import Button from '../Button';
 
-import {
-  Container,
-  Topside,
-  Logo,
-  MenuButton,
-  HomeIcon,
-  ProfileIcon,
-  ExitIcon,
-} from './styles';
+import { Container, Topside, Logo, MenuButton } from './styles';
 
 const MenuBar = () => {
   return (
     <Container>
       <Topside>
-        <Logo />
+        <Logo>
+          <FaTwitter />
+        </Logo>
 
         <MenuButton>
-          <HomeIcon />
+          <FaHome />
 
           <span>Página Inicial</span>
         </MenuButton>
 
         <MenuButton className="active">
-          <ProfileIcon />
+          <FaUser />
           <span>Perfil</span>
         </MenuButton>
 
         <MenuButton>
-          <ExitIcon />
+          <HiLogout />
           <span>Logout</span>
         </MenuButton>
 

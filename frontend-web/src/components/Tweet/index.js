@@ -1,4 +1,9 @@
 import React from 'react';
+import {
+  AiOutlineComment,
+  AiOutlineRetweet,
+  AiOutlineLike,
+} from 'react-icons/ai';
 
 import {
   Container,
@@ -11,9 +16,6 @@ import {
   ImageContent,
   Icons,
   Status,
-  CommentIcon,
-  RetweetIcon,
-  LikeIcon,
 } from './styles';
 
 const Tweet = () => {
@@ -34,17 +36,17 @@ const Tweet = () => {
 
           <Icons>
             <Status>
-              <CommentIcon />
+              <AiOutlineComment />
               10
             </Status>
 
             <Status>
-              <RetweetIcon />
+              <AiOutlineRetweet />
               10
             </Status>
 
             <Status>
-              <LikeIcon />
+              <AiOutlineLike />
               100
             </Status>
           </Icons>

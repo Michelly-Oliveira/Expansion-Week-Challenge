@@ -1,6 +1,4 @@
-import styled, { css } from 'styled-components';
-
-import { Email, Lock, Login, Person } from '../../styles/Icons';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -37,24 +35,6 @@ export const Form = styled.form`
     margin: 30px 0 50px;
   }
 
-  div {
-    background: var(--primary);
-    padding: 14px 10px;
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-
-    svg {
-      margin-right: 10px;
-    }
-
-    input {
-      flex: 1;
-    }
-  }
-
   button {
     background: var(--twitter);
     width: 255px;
@@ -68,45 +48,30 @@ export const Form = styled.form`
   }
 
   a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     text-decoration: none;
     margin: 20px 0 50px;
     color: var(--gray);
     font-size: 14px;
+    transition: color 0.2s ease-in;
 
     svg {
       margin-right: 5px;
+      width: 20px;
+      stroke: var(--gray);
+      height: 20px;
+      transition: stroke 0.2s ease-in;
     }
 
-    /* &:hover {
+    &:hover {
       color: var(--outline);
-    } */
+
+      svg {
+        stroke: var(--outline);
+      }
+    }
   }
-`;
-
-export const UsernameIcon = styled(Person)`
-  width: 24px;
-  height: 24px;
-
-  fill: var(--twitter);
-`;
-
-export const EmailIcon = styled(Email)`
-  width: 24px;
-  height: 24px;
-
-  fill: var(--twitter);
-`;
-
-export const PasswordIcon = styled(Lock)`
-  width: 24px;
-  height: 24px;
-
-  fill: var(--twitter);
-`;
-
-export const LoginIcon = styled(Login)`
-  width: 20px;
-  height: 20px;
-
-  fill: var(--gray);
 `;

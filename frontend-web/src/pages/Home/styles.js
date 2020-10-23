@@ -1,12 +1,4 @@
-import styled, { css } from 'styled-components';
-
-import {
-  ArrowLeft,
-  Home,
-  Notifications,
-  Search,
-  Email,
-} from '../../styles/Icons';
+import styled from 'styled-components';
 
 import ButtonComponent from '../../components/Button';
 
@@ -62,14 +54,28 @@ export const Button = styled.button`
   &:hover {
     background: var(--twitter-dark-hover);
   }
+
+  svg {
+    width: 31px;
+    height: 31px;
+
+    cursor: pointer;
+
+    fill: var(--gray);
+
+    &:hover,
+    &.active {
+      fill: var(--twitter);
+    }
+  }
 `;
 
-export const BackIcon = styled(ArrowLeft)`
-  width: 24px;
-  height: 24px;
+// export const BackIcon = styled(ArrowLeft)`
+//   width: 24px;
+//   height: 24px;
 
-  fill: var(--twitter);
-`;
+//   fill: var(--twitter);
+// `;
 
 export const ProfileInfo = styled.div`
   margin-left: 17px;
@@ -105,36 +111,6 @@ export const BottomMenu = styled.div`
   @media (min-width: 500px) {
     display: none;
   }
-`;
-
-const iconCss = css`
-  width: 31px;
-  height: 31px;
-
-  cursor: pointer;
-
-  fill: var(--gray);
-
-  &:hover,
-  &.active {
-    fill: var(--twitter);
-  }
-`;
-
-export const HomeIcon = styled(Home)`
-  ${iconCss}
-`;
-
-export const BellIcon = styled(Notifications)`
-  ${iconCss}
-`;
-
-export const SearchIcon = styled(Search)`
-  ${iconCss}
-`;
-
-export const EmailIcon = styled(Email)`
-  ${iconCss}
 `;
 
 export const ProfileContainer = styled.div`
