@@ -70,13 +70,6 @@ export const Button = styled.button`
   }
 `;
 
-// export const BackIcon = styled(ArrowLeft)`
-//   width: 24px;
-//   height: 24px;
-
-//   fill: var(--twitter);
-// `;
-
 export const ProfileInfo = styled.div`
   margin-left: 17px;
 
@@ -90,26 +83,6 @@ export const ProfileInfo = styled.div`
   > span {
     font-size: 15px;
     color: var(--gray);
-  }
-`;
-
-export const BottomMenu = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 2;
-
-  background: var(--primary);
-  width: 100%;
-  border-top: 1px solid var(--outline);
-
-  display: flex;
-  justify-content: space-between;
-
-  padding: 8px min(46px, max(10ve, 10px));
-
-  @media (min-width: 500px) {
-    display: none;
   }
 `;
 
